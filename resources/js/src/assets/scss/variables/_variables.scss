@@ -1,0 +1,904 @@
+//  ================================================================================================
+//  ? TIP:  It is recommended to use this file for overriding bootstrap variables.
+//  ================================================================================================
+
+$primary: #00B1FF;
+$success: #03d670;
+$danger: #F55E5E;
+$warning: #f9b301;
+$dark: #222222;
+
+$primary-ligth: #DCF4FF;
+$blue: #006EAF;
+$pink: #fb2193;
+$pink-light: #FFEBF6;
+
+$red: #F55E5E;
+$red-light: #FFEBF6;
+$orange: #ff9f43;
+$yellow: #ffc107;
+$yellow-light: #FFF1D3;
+$green: #03d670;
+$green-light: #D6FAE8;
+$teal: #20c997;
+$cyan: #00B1FF;
+$cyan-light: #DCF4FF;
+$white: #fff;
+$dark: #222222;
+$gray-dark: #222222;
+$secondary: #777777;
+$supergray: #E0E0E0;
+$gray: #A9A9A9;
+$light: #CCCCCC;
+$palelight: #F5F5F5;
+$info: #00B1FF;
+
+
+
+$fontinter:'Inter';
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{ color:#222222; font-family: $fontinter;}
+h1{ font-size:2.25rem; font-weight: 600 !important;}
+h2{ font-size:2.25rem; font-weight:600 !important;}
+h3{ font-size: 1.5rem; font-weight: 600 !important;}
+h3.large{ font-size: 1.875rem;}
+h4{ font-size: 1.125rem;}
+h5{ font-size:1rem;}
+h6{ font-size:1rem;}
+p{ font-size:1.125rem; font-weight: normal; color:$secondary;}
+
+body{ color:$secondary; font-family:$fontinter; font-weight: normal; line-height:normal;}
+label{color:$secondary;}
+.navigation{ font-family: $fontinter;}
+
+
+.vertical-layout.vertical-menu-modern .main-menu .navigation > li > a svg, .vertical-layout.vertical-menu-modern .main-menu .navigation > li > a i{ width:18px; height:18px;}
+.navigation-main {
+    .fa-circle{ border:1px solid $secondary; border-radius:100px; width:14px !important; height:14px !important;
+        path{ fill:#ffffff;}
+    }    
+    
+}
+
+.navbar-nav{
+    .fa-plus{border: solid 1px; border-radius: 100px; padding: 4px; width: 13px; height: 13px;}
+}
+
+.vertical-layout.vertical-menu-modern.menu-expanded .main-menu .navigation li.has-sub > a:after{ right:35px;}
+.navbar-header .modern-nav-toggle{ display: none;}
+.vertical-layout.vertical-menu-modern.menu-expanded .main-menu .navigation li.has-sub > a:after{ background-size: 1.4rem;}
+.breadcrumb-item{ 
+.fa-gauge{font-size:20px;}
+}
+.card-congratulations .congratulations-img-right{ width: 140px;}
+.card-congratulations .congratulations-img-left{ width:145px;}
+
+.brand-logo{align-items: center;
+svg{ height: 70px !important; width: 70px !important;}
+}
+
+.main-menu .navbar-header{ height: auto; padding-bottom:10px;}
+.main-menu .navbar-header .navbar-brand .brand-logo img{ max-width:45px;}
+.nav .modern-nav-toggle{ margin-top:30px;}
+.card-congratulations{
+    p{ color: $secondary;}
+    .rounded{ border-radius:100px  !important; position: relative;}
+    em{ color: $light; font-style: normal;}
+    
+    }
+
+
+
+
+.btn-primary{ box-shadow:0 2px 8px rgba(0, 177, 255, 0.3); border-radius:8px;
+        svg{margin-right:8px;}        
+        }
+.btn-warning{border-radius:8px;  box-shadow:0 2px 8px rgba(245, 94, 94, 0.3);
+    svg{margin-right:8px;} 
+}        
+.btn-success{border-radius:8px; box-shadow:0 2px 8px rgba(3, 214, 112, 0.2);  
+    svg{margin-right:8px;} 
+}        
+.btn-danger{border-radius:8px;  box-shadow:0 2px 8px rgba(245, 94, 94, 0.3);  
+    svg{margin-right:8px;} 
+}        
+.btn:hover:not(.disabled):not(:disabled){ box-shadow: none;}        
+.btn-primary:hover:not(.disabled):not(:disabled){ box-shadow: none; background: #009fe6 !important;}        
+.btn-secondary{box-shadow:0 2px 8px rgba(204, 204, 204, 0.5); background: $gray !important; border-color: $gray !important;   
+}
+
+.btn-success:hover:not(.disabled):not(:disabled){ box-shadow: none; background: #02a456 !important;}        
+.btn-warning:hover:not(.disabled):not(:disabled){ box-shadow: none; background: #c68e01 !important;}        
+
+.btn-pink{ background:$pink !important; border-color: $pink !important; box-shadow: 0 2px 8px rgba(251, 33, 147, 30%) !important; border-radius:8px;}
+.btn-pink:hover{ box-shadow:0 2px 8px  rgba(251, 33, 147, 0.3) !important; background:#e20377 !important;}
+.btn-pink:focus{ box-shadow:0 2px 8px  rgba(251, 33, 147, 0.3) !important; background:#e20377 !important;}
+.btn-pink:hover:not(.disabled):not(:disabled){ box-shadow:0 2px 8px  rgba(251, 33, 147, 0.3) !important; background:#e20377 !important;}
+
+.btn-pink-btn{ background: $pink; color:$white; box-shadow:0 2px 8px rgba(251, 33, 147, 0.3) !important; border-radius:8px;
+    &:hover{ color:$white; background:#e20377 !important;}
+    }
+
+
+
+
+
+
+
+
+.tab-fill{ font-weight: bold; color:$gray-dark;
+    .tab-pane{ text-align: center; padding:30px 0 16px 0;
+    h3{padding-top:24px; padding-bottom:5px;}
+    p{ padding-bottom:16px; font-size:20px;}
+    }
+    .b-avatar-lg{ width:8rem; height:8rem; background: none;}
+
+    em{display: block; padding-top:30px; font-style: normal; font-size: 1rem;
+    b{background:#ffffff; padding:0 16px; position: relative; z-index:99; font-weight:normal; color:$gray;}
+    }
+
+    i{ margin: -8px 0 0 0 !important;  display: block;  text-align: center;  width: 100%;  left: 0;}
+    .nav-pills{ background: $palelight; padding:8px; border-radius:8px;}
+    .nav-link.active{ background: $white; box-shadow:1px 1px 2px rgb(34 41 47 / 10%); border-color:$white; color: $gray-dark; border-radius:8px;}
+}
+
+.main-menu .navbar-header .navbar-brand .brand-text, .auth-wrapper .brand-logo .brand-text{ color:$dark !important;}
+
+.setting-list{
+    .b-avatar{ margin-right:10px;}
+    .rounded-circle{ border-radius:0px !important; background: none;}
+    .b-avatar-img{ border-radius:0px; width: auto; height: auto;
+    }
+    .list-group-item{ padding:1rem 1.5rem;}
+    svg{ float: right; color: $gray;}
+
+    a:hover{ background-color:none;        
+    }
+    a:focus{
+        svg{ color: $white;}
+    }
+ 
+}
+.gap{ background:$palelight; height:30px;}
+
+.setting{
+    .card-body{ padding:0px;}
+
+}
+
+.b-outline{ border:100%; border:solid 1px inherit; background: none; color: inherit;}
+
+
+.all-notification{
+    h2{ padding:25px 30px;}
+    h5{ background:$palelight; color:$secondary; height: 40px; line-height: 40px; font-size: 1rem; padding:0 30px; color:$gray-dark;}
+    .card-body{ padding:0px;}
+    .badge{ border-radius:100px; height:28px; line-height: 28px; padding:0 15px; font-weight: normal; margin-right:10px; font-size: 1rem;
+    }
+    span{ font-size: 1rem;}
+    .badge-warning{ background:$yellow-light; color: $warning;}
+    .badge-danger{ background:$red-light; color: $danger;}
+    .badge-success{ background:$green-light;  color: $success;}
+    .badge-dark{ background:$palelight;  color: $dark;}
+    .badge-blue{ background:$cyan-light; color: $cyan;}
+    .badge-pink{ background:$pink-light; color: $pink;}
+    .media-heading{padding-bottom:10px; font-size:	1.25rem;}
+    .card-header{ padding-left:30px; padding-right:30px;}
+}
+
+
+.note{ text-align: center; background:$palelight; padding:30px 15px;
+h4{ color:$gray-dark;}
+}
+
+
+
+.setting-tab{ padding:0 1.5rem; background: none; box-shadow: none; padding:0px 15px; 
+
+    .card-header{ padding-left:0px;}
+    .card-body{ padding:0 0px;
+        .tabs{ padding:0 15px;}
+    }
+    .col-auto{ border-radius:8px;  padding:0px;
+        .b-avatar-img{ border-radius:0px; width: auto; height: auto;            
+        }
+        .rounded-circle{ background: none; border-radius:0px; margin-right:10px;}
+    }
+    .tab-content{ box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%); background: $white; margin-left:2%; border-radius:8px; padding:30px;}
+    .nav-pills .nav-link{justify-content: space-between; align-items:center; border: solid 1px #dddedf; padding-right:10px; border-radius:8px; margin:5px 0; 
+        background:$white; color:$gray-dark; font-weight: 600;
+        span{ display: flex; align-items: center;}
+        svg{ color: $gray; margin-left:25px;}    
+        &.active{ border: none; background: $info; color: $white;
+            svg{ color: $white;}
+        }          
+            &:focus{
+                svg{ color: $white;}
+            }
+    }
+    
+}
+
+.content-header-title{ color:$dark !important;}
+
+
+.delete-account{
+
+    .custom-radio{ padding-bottom: 12px;}
+}
+
+.whatsnew{
+    .media{ padding:1.25rem 0;}
+    .card-body{margin:0px !important; text-align: center; padding:20px;}
+}
+
+.tell-friend{ padding:15px 0;
+    h3{ padding-top:30px;}
+    p{ font-size: 1rem;}
+}
+
+.social{
+    a{ margin:0 5px; border-radius:100px;}
+}
+
+
+.award{ background:$white; box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%); border-radius:8px; padding:30px; margin-bottom:30px; flex: 1 1 auto;
+h3{
+a{color:$pink; float: right; font-size:1.125rem; font-weight: normal;}
+}
+h2{
+    a{ color:$pink; float: right; font-size:1.125rem; font-weight: normal;}
+    }
+.media{ padding:1.25rem 0 !important; margin:0px;
+    .media-aside{ margin-right:1.25rem; display: flex; flex-direction: column; text-align: center; 
+    span{ display: block; padding-top:8px; font-weight: bold;}
+    }
+    .badge{ border-radius:100px;}
+    p{ padding-top:5px; margin-bottom:0px;}
+}
+
+.award-last{
+h4{ font-weight: 600;
+span{ color: $secondary; font-weight: normal;}
+}
+span{ font-weight: 600;}
+}
+
+.blue{ color:$primary;}
+.warning{ color:$warning;}
+.pink{ color:$pink;}
+.red{ color:$red;}
+}
+
+
+.all-award{
+    a{color:$pink; font-size: 18px; text-decoration: underline;}
+}
+.aw-score{ border:solid 1px $light; border-radius:16px; padding-bottom:16px;
+    .align-items-center{ border-top:solid 1px $light; padding-top:16px;}
+}
+.next-flow{
+    .media-aside{
+        span{ font-size:10px;}
+    }
+
+}
+
+
+.dissable-aw{
+    h4{color:$secondary;}
+    h3{color:$secondary;}
+    p{color:$secondary;}
+
+}
+
+.media-list .media{ padding:25px 30px;}
+
+.text-muted{color:$secondary !important;}
+.leaderboard{ box-shadow: none; margin-bottom:0px;
+    i{ display: inline-block; margin-top:-8px; z-index: 1; position: relative;}
+    .text-muted{ color:$secondary !important; font-size: 1rem;}
+
+    .card-body{ padding:0px;}
+    .fa-badge-check{ color: $green;}
+    .fa-mountains{ color: $primary;}
+    a{ font-size: 16px;}
+}
+
+.leaderboard-inner{border:solid 1px $light; border-radius:16px; padding-bottom:16px;
+    .top-user{ margin: -45px;
+        i{ display: block;}
+    }
+}
+.leader-list {
+    ul{ list-style: none; margin:0px; padding:0px; border-top:solid 1px $light; padding-top:15px;
+    
+    li{ line-height: normal; padding:0 15px; display:inline-block; font-size: 16px;}  
+}
+
+
+}
+
+.acc-profile{
+    p{ color: $gray;}
+    span{ font-size: 18px; color: $gray-dark; display: block; color:$dark; padding-bottom:15px;
+    i{color:$gray;}
+    }
+    a{color: $dark;
+    &:hover{ color:$cyan;}
+    }
+
+}
+
+.global{ text-align: center; padding-top:30px;
+    .badge{ border-radius:100px; height:24px; padding:0 8px; line-height: 24px;    
+    }
+    i{ display: block !important; text-align: center;}
+
+em{ display: block; font-style: normal; padding-bottom:10px;}
+h3{ padding:15px 0 5px 0;}
+
+.badge-light-danger{ background:$pink-light; color:$pink !important; position: relative; z-index:9;}
+}
+
+
+.user-left{
+
+    img{ margin-right:15px;}
+    h3{ padding-bottom:8px;}    
+}
+.user-right{
+    div{ margin-left:20px;}
+    p{ margin-bottom:5px;}
+    span{ color:$dark; font-size: 1rem;}
+}
+
+
+.trial{ padding:0px; box-shadow:0 2px 8px rgba(0, 0, 0, 0.15); border: solid 1px #E0E0E0;
+
+    .user-left{padding:24px;}
+
+    .left-trial{background:$pink-light; border-radius:8px; padding:8px 15px; margin-right:15px; color:$pink; text-align: center; font-weight: bold;
+        span{ display: block; font-size: 24px;}
+         em{ text-transform: uppercase; font-size:10px; font-style: normal; line-height: normal;}
+    
+    }
+    h6{  font-size:18px; padding-bottom:5px;
+        span{ color: $pink;}
+    }
+
+    .light-warning{ display: block; background: $yellow-light !important; color:$gray-dark !important; border-color:$yellow-light !important; width:100%; text-align: left; border-radius: 0 0 8px 8px; font-size: 1rem; 
+    i{margin:0px; display: inline-block; color: $warning;}
+    }
+}
+
+
+
+
+
+.rg-flow .auth-inner{max-width:300px;
+    
+}
+
+
+.rg-flow{align-items: flex-start !important; overflow: visible; margin-top:120px;
+    h2{color:$pink; padding-bottom:15px;}     
+    label{font-size:1rem; padding-bottom:5px;}
+    h3{padding-bottom:8px;}
+    p{font-size:1.125rem; line-height:26px; padding: 0 7px;}
+.card{border-radius:20px;}
+.card-body{padding:3rem 3rem;}
+}
+
+.rg-flow .brand-logo svg{ width:160px !important; height:160px !important;}
+
+.otp-input {
+    width: 70px;
+    height:75px;
+    margin:0 5px 0 0px;    
+    display: inline-block;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius:8px;
+    text-align: center;
+    font-size:28px;
+    
+}
+
+
+
+.top-nav{display: flex; align-items: center; justify-content: space-between; padding:20px 5% 0 5%; position: fixed; width:100%; top:0px;}
+.foot{text-align: center; padding-bottom:20px; position: fixed; bottom:0px; width: 100%;}
+
+.login-flow{
+    h2{color:$gray-dark; padding-bottom:0px;}
+    p{ padding:0px; font-size: 1rem;
+    em{ font-size: 12px; font-style: normal; display: block; padding-top:10px; color: $gray;} 
+    }
+}
+
+.m-otp{
+
+    p a{ background:$palelight; color: $gray; padding:7px 15px; border-radius:5px; font-size: 12px; margin-right:5px; margin-top:10px; display: inline-block;
+    &:hover{color:$dark; }
+    }
+}
+
+
+.aw-left-box{ border:solid 1px $pink; border-radius:10px; padding:15px; text-align: center; flex:1 1 auto;
+h5{ padding-bottom:5px;}
+p{ margin:0px; padding-top:8px;}
+}
+.aw-right-box{ border-color:$warning; flex:1 1 auto;}
+.gray-bt{ background: $palelight; color:$gray;}
+.tab-fill .tab-pane{ text-align:center;}
+
+.table thead th:nth-child(1){ width:7%;}
+.table thead th:nth-child(2){ width:5%; padding: 0.72rem 0rem;}
+.table thead th:nth-child(3){ width:30%; padding-left:15px;}
+.table thead th:nth-child(4){ width:28%;}
+.table thead th:nth-child(5){ width:30%;}
+
+.table tbody td:nth-child(1){ width:7%;}
+.table tbody td:nth-child(2){ width:5%; padding: 0.72rem 0rem;}
+.table tbody td:nth-child(3){ width:30%; padding-left:15px;}
+.table tbody td:nth-child(4){ width:28%;}
+.table tbody td:nth-child(5){ width:30%;}
+
+
+.table-responsive{ border-radius:8px; border: solid 1px #ebe9f1;}
+
+.how-it-work{
+    .media p{ padding-top:0px;}
+}
+
+
+#modal-sm{ text-align: center;
+    .modal-content{ border-radius:8px;
+    img{ margin-bottom:10px;}
+    }
+    .modal-body{ padding:0px 30px 30px 30px;}
+    .modal-header{ background: none;}
+    .modal-footer{ display: none;}
+}
+
+
+.how-table .table thead th{ width:50% !important;}
+
+
+.ab-level{ box-shadow: none; padding:0px;
+.media{border:solid 1px #ebe9f1; border-radius:8px; padding:15px !important;
+
+}
+h3{ padding-bottom:0px  !important;
+    span{ float: right; font-size: 12px;}
+}
+.b-pink{ background:#FFEBF6; color:$pink;}
+p{ padding-bottom:0px;}
+span{ font-weight: 600;}
+
+.media-body span{ font-weight: normal;}
+}
+
+
+.blank-challenge{ text-align: center; padding:15px 15px 15px 15px;
+
+    
+        h2{padding-top:10px;}
+        h3{padding-top:0px; padding-bottom:5px;}
+        p{ padding-bottom:0px; 
+        a{ font-size:1rem; color: $gray-dark;}
+        }
+        .b-avatar-lg{ width:8rem; height:8rem; background: none;}
+        em{display: block; padding-top:30px; font-style: normal;
+            b{background:#ffffff; padding:0 20px; position: relative; z-index:99; font-weight:normal;}
+         }    
+        i{ margin: -18px 0 0 0 !important;  display: block;  text-align: center;  width: 100%;  left: 0;}
+    
+}
+
+.challengeuser{background-color:#ffffff; border-radius:8px; 
+    h2{padding-top:0; padding-bottom:0;}
+    p{padding-bottom:15px; font-size: 1.25rem;}
+    i{position: absolute; z-index:1; margin:-90px 0 0 90px;}
+}
+
+
+
+.rules{ padding-top:15px;
+.card{ margin:0px;
+img{ width:60px;}
+}
+h4{ padding-top:15px; font-weight:600;}
+h2{ padding-top:0px;}
+}
+
+.rules-loop{ 
+    h3{ padding-top:15px; padding-bottom:5px;}
+    .card-body{ border:solid 1px #ebe9f1; border-radius:8px; cursor: pointer;  transition: 0.3s; margin:15px 0;
+        &:hover{box-shadow:rgb(0 0 0 / 16%) 0px 14px 60px;}
+        p{color:$light; padding-bottom:0px; color: $secondary;}
+    }
+    
+}
+
+
+ul.search-list{ list-style: none; margin:0px; padding:0px;
+li{ line-height: normal;
+a{ border:1px solid #d8d6de; border-radius:5px; height:38px; color:$secondary; line-height:38px; display: inline-block; padding:0 15px; margin-right:10px; font-weight:600; color:$gray-dark;}
+}
+}
+
+.health{ text-align: center;
+    .card-body p{ font-size:14px;}
+}
+
+
+.chellenge-open{
+    i{margin: 0 auto;  display: block; width: 100%; position: relative;}
+
+    .health{ position: relative;
+        h3{color: $primary; padding-bottom:0px;}
+        h4{ padding-top:0px; padding-bottom:5px; color:$secondary; font-weight: normal; font-size: 24px;}
+span{ display:inline-block; border:solid 1px $primary-ligth; color: $primary; border-radius:100px; height: 32px; line-height:32px; padding:0 15px; background-color:$primary-ligth; font-weight:600;}
+i{position:absolute; right:15px; top:30px; width: auto; text-align: right; top:50px;
+img{ width:25px;}
+.card-body p{ font-size: 1rem;}
+}
+}
+    .disabled{ color:$secondary; position: relative;
+    h3{color:$secondary;}
+    h4{color:$secondary;}    
+    svg{ position: absolute; right:0px; top:0px; color: $secondary;}    
+    .card-body p{ font-size: 1rem;}
+    span{border:solid 1px $secondary; color: $secondary; background: none;}
+}
+}
+
+
+.award-disabled{
+h3{color:$secondary;}
+p{color:$secondary;}
+}
+
+
+ul.icon-list-loop{ list-style: none; margin:0px; padding:0px;
+li{ line-height: normal; display: inline-block;
+a{ border:solid 1px $palelight; border-radius:100%; display: inline-block; width:95px; height: 95px; margin:0 10px 10px 0; display: flex; align-items: center; position: relative;
+img{margin: auto;}
+span{display: none;}
+&:hover{border-color:$primary;
+span{background-color: rgba(255,255,255,0.8); display: block; width:100%; height:100%; border-radius:100%; position: absolute; align-items: center; display: flex;}
+}
+}
+}
+}
+
+
+.chllenge-completed{  position: relative;
+.card-body{padding:0px 0 1.5rem 0; border-color: $primary-ligth;
+    em{ color:$primary; display: block; height:46px; line-height: 46px; border-radius:8px 8px 0 0; font-style: normal; padding:0px;}
+    h3{ padding-top:15px;}
+    
+i{ position: absolute; right:15px; top:75px; color: $gray;  width: auto; text-align: right; width:100%; padding-right:15px;
+    img{ width:25px;}
+    }
+}
+
+}
+
+
+.chllenge-completed-pink{
+.card-body{ border-color: $pink-light;
+    h3{color:$pink;}    
+    span{background: $pink-light; color: $pink; border-color:$pink-light;}
+}
+}
+
+
+
+
+.chellenge-detail{
+ span{ font-size: 1rem;}
+    h4{ color: $pink; padding-top:15px;}
+}
+
+
+
+.set-time{
+.card{ margin-bottom:0px;
+    .card-body{
+&:hover{ background:$primary-ligth; border-color: $primary-ligth;}
+}
+}
+}
+
+
+.set-time{
+ul{list-style: none; margin:0px; padding:0px; border: solid 1px #ebe9f1; padding:15px; border-radius:8px;}
+li{line-height: normal; display:block; font-size: 16px; color: $gray-dark; padding:8px 0; align-items: center; display: flex; justify-content: space-between;
+span{ background:$palelight; color: $gray; padding:8px 15px; border-radius:8px; float:right; display: inline-block;}
+}
+p{color: $gray;}
+}
+
+
+.ch-reminder{
+    h4{color: $pink;}
+    ul{border:none; padding:0px 0 10px 0; margin:0 0 0 0;}
+    li{display: inline-block; color:$gray-dark; padding:0px;}
+    a{color:$gray-dark; padding:0 25px; height:45px; line-height:45px; display: inline-block;  border-radius:8px; box-shadow:0 1px 3px rgba(0,0,0,0.2);  margin:0 8px 8px 0px; 
+    &:hover{ color: $primary; background-color:$primary-ligth;}
+    }
+}
+
+.challenges-step{ padding:15px; box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%);}
+
+.userflow{
+h3{ padding-top:30px;}
+p{ padding:0px;}
+}
+
+.form-select{background-color: #fff; background-clip: padding-box; border: 1px solid #d8d6de; color:#b9b9c3;  padding: 0.75rem 1.143rem; border-radius: 0.357rem; width:100%; font-size: 1.143rem;}   
+
+.gender-loop{margin-bottom:0px;
+.card-body{padding:20px 15px 15px 15px; text-align: center;}
+p{padding-top:15px;}
+}
+
+
+.profile-pic{
+
+    img{ border-radius:100px;}
+}
+
+
+ul.user-pic-loop li a{width:70px; height: 70px;
+ img{ width:100%;}
+
+ &:hover{ border-color:$pink;}
+}
+
+
+.promise-loop{ position: absolute; bottom:30px; left:30px; right:30px;
+
+    .media{ padding:0px; background: $white; border-radius:12px; padding:20px; margin-bottom:15px;
+    
+        .media-aside{ margin-right:20px;}
+        p{ color: $gray-dark; font-size:1.3rem;}
+    }
+}
+
+
+.box-one{background: $red-light; border-radius:4px; position: relative; padding: 15px; margin-bottom:15px;
+    i{position: absolute; right:15px; top:25px;}
+    h2{ font-size: 3.75rem;}
+p{ color:$gray-dark; font-weight:600;}
+}
+.box-two{ background:$yellow-light; }
+.box-three{ background: $cyan-light;}
+.box-four{ background: $green-light;}
+
+.profile-award{
+    h3{ padding-top:20px;}
+    .pink{ color:$pink;}
+    .blue{ color:$cyan;}
+    .gray{ color:$secondary;}
+    p{padding-bottom:16px;
+    &:last-child{ padding-bottom:0px; margin-bottom:0px; padding-top:8px;}
+    }
+    .border{ margin:0px;}    
+    
+}
+
+.border{border:solid 1px $light; border-radius:8px; padding:24px; box-shadow:0 2px 8px 0 rgb(34 41 47 / 10%); margin:-42px 0 0 0;}
+
+.premium-btn{ margin-top:-16px;  position: relative;
+    .badge{border-radius:100px; padding:0.5rem 0.7rem;}
+    i{margin:0 5px 0 0;}
+}
+
+
+.pricing{ position: relative;
+ul{list-style: none; margin:0px; padding:0px;
+li{line-height: normal;  display: inline-block; line-height:36px; font-size:18px; color: $gray-dark; font-weight: 500; width:100%;
+.fa-check{ color: $green; margin-right:5px;}
+}
+}
+}
+
+.pp-pic{ position: absolute; right:0; top:30px;}
+
+.price-loop{border:solid 2px $palelight; padding:15px 30px; border-radius:8px; cursor: pointer; margin-top:15px; position: relative; z-index:9; 
+    background:$white;
+.left-p{text-align: left; font-size:1.5rem; color: $dark; font-weight: bold;
+    .check{ margin-right:10px;}
+    .custom-control-label{font-size:1.2rem; color: $dark; font-weight: bold;}
+}
+
+.right-p{text-align: right;
+span{ background:$green; font-size:10px; color:$white; border-radius:100px; padding:2px 8px; text-transform:uppercase; font-weight: normal;}
+p{font-size:14px; color:$gray; margin-bottom:0px;}
+em{font-style: normal; color: $red; text-decoration: line-through;}
+.pink{background: $pink;}
+.yellow{background: $yellow;}
+}
+&:hover{border-color:$green;}
+}
+.price-loop.active{ border: solid 2px $green;}
+.popular{ position: absolute; left:0px; top:-3px;}
+.seeker{
+    h3{ padding-bottom:10px;}
+    p{ font-size: 16px; text-align:center; padding-bottom:15px;}
+}
+
+
+.p-subtext{
+
+    p{font-size:14px; color:$gray; padding-top:15px;
+    
+    a{ padding:0px 10px;}    
+    }
+    span{ font-size: 12px; color: $gray-dark;
+    a{color:$pink;}
+    }
+
+}
+
+
+.date-user{
+    h2{font-size:48px; margin:0px;}
+    .box-one{ padding:16px; margin-bottom:24px; 
+        h2{padding-bottom:16px; line-height:38px;}
+        p{ margin-bottom:0px;}
+    i{ top:16px; right:16px;}
+    }
+    .box-three{margin-bottom:0px;}
+    .box-four{margin-bottom:0px;}
+}
+
+.no-active{ text-align: center;
+}
+
+.overview-list{ display: flex; justify-content: space-between;  
+  border-bottom: 1px solid $palelight; padding:12px 0; color: $gray-dark; font-weight:600;
+  width:93%; position: relative;
+  div{ font-size:16px;}
+  
+span{ color: $secondary; font-weight: normal; font-size:14px;}
+
+svg{ margin: 0 -24px 0 10px; font-size:18px;}
+.fa-circle-check{color:$green;}
+.fa-triangle-exclamation{color:$warning;}
+
+}
+
+.main-menu.menu-light .navigation li a{ color:$secondary;}
+
+.avg-sessions{
+    p{color:$secondary;}
+}
+
+.upgrade{text-align:center; position: relative;
+span{background:$warning; font-size: 1rem; color: $white; height:24px; line-height: 24px;padding:0 15px; border: solid 1px $white; border-radius:100px; display: inline-block;}
+ button{border-radius:8px;}
+ .card-body{padding:0px 0 30px 0;}
+ i img{width:100%;}
+ .off{padding:16px; margin:-30px 0 0 0; position: relative; z-index:9;}
+
+ .overlay-up{ position: absolute; top:0px; width:100%; text-align: center;}
+}
+
+.poll-week{background:$primary-ligth; position: relative; box-shadow:0 2px 8px rgba(0, 177, 255, 0.2) !important;
+    h3{ color: $cyan;}
+span{ color: $pink; display: block; padding:0 0 8px 0; font-size:18px; font-weight:600;}
+ul{ list-style: none; margin:0px; padding:0px;
+li{ background: $white;  margin:8px 5px 8px 0; border-radius:4px; color: $gray-dark; padding:0 24px; color:$gray-dark; font-size: 1rem;}
+}
+p{ font-size: 1rem; color: $gray-dark;}
+em{ font-style: normal; color: $gray-dark; padding-top:24px; display: block;}
+
+.check{ padding-bottom:10px; padding-top:10px; padding-left:30px;}
+.custom-radio .custom-control-label::before{top:10px;}
+}
+
+.poll-icon{ position: absolute; right:15px; top:0px;
+img{ width:35px;}
+
+}
+
+.s-rate{
+
+    img{ width:100%;}
+    p{text-align: center; padding-top:16px; margin-bottom:0px; font-size: 1rem;}
+}
+
+
+.quote{ background: $cyan;  box-shadow:0 2px 8px rgba(0, 177, 255, 0.3) !important;
+    h3{ color: $white;}
+p{ font-size:24px; line-height:36px; color: $white; padding:0px 0 16px 0; font-weight:600; font-weight: normal;}
+span{ color: $white; font-size: 1rem;}
+}
+
+
+.d-award{ 
+h3{ padding-top:0px; margin-bottom:0px;}
+    a{ font-size: 16px; color: $pink; float: right; font-weight: normal;}
+}
+
+.top-off{ background:$yellow-light; position: relative;  box-shadow:0 2px 8px rgba(249, 179, 1, 0.2) !important;
+    button{ border-radius:8px;}
+span{ color: $pink; font-size:18px; font-weight:600;}
+p{ color: $gray-dark; line-height: 24px; padding:8px 0 16px 0; font-weight:normal; font-size:18px;}
+}
+
+
+.future-loop p {
+    font-size: 1.25rem;
+    color: #777777;
+    padding: 15px 30px 0 30px;
+    margin-bottom: 0px;
+  }
+
+
+.wnewlist{
+    h3{ font-weight: 600;}
+    .media{ padding: 25px 0px;}
+    .media-body ul{ margin:0px; padding:0px;
+    li{display: block; line-height:28px;
+    i{ font-weight: bold; margin-right:5px; font-style: normal;}
+    }
+    }
+
+    .custom-control {font-size:18px; font-weight:600;
+    label{ color: $gray-dark; padding-bottom:15px;}
+    }
+}
+
+.custom-btn{background:$pink-light !important; color:$pink !important; border-color:$pink-light !important;
+&:focus{background:$pink-light;}
+}
+
+footer.footer{padding:90px 30px 30px 30px;}
+
+.pricing-faq{
+    .card{
+    .card-header{border-top: 1px solid $palelight; border-radius:0px; font-size: 18px; color: $gray-dark; }
+    .collapse-title{font-weight:600;}
+}
+.open{
+    span{ color: $cyan;}
+}
+}
+
+
+.edit-profile{
+label{color:$gray-dark;}
+}
+.flatpickr-input{height:45px;}
+.v-select.vs--single .vs__selected{color: #6e6b7b;}
+
+.about{
+.card-body{ padding:20px; background: $white; border-radius:8px;}
+h3{ padding-bottom:5px;
+span{color: $pink;}
+}
+h2{
+    span{color: $pink;}    
+}
+
+}
+
+.dismiss{display: flex; justify-content: space-between; background:$white; box-shadow: 0 4px 24px 0 rgb(34 41 47 / 10%); padding:10px 15px; border-radius:8px; color: $gray-dark; font-weight:600;
+p{ margin:0px;  color: $gray-dark; font-weight:600;}
+}
+
+.main-menu.menu-light .navigation > li.active > a{ box-shadow: 0 2px 8px rgb(0 177 255 / 30%); border-radius:8px;}
+
+
+.leftlogin{
+img{ width:100%; margin-bottom:-300px;}
+
+}
+
+#doughnut-chart{ height:200px  !important;}

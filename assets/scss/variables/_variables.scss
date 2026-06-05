@@ -1,0 +1,59 @@
+//  ================================================================================================
+//  ? TIP:  It is recommended to use this file for overriding bootstrap variables.
+//  ================================================================================================
+
+$primary: #00B1FF;
+$success: #03d670;
+$danger: #F55E5E;
+$warning: #f9b301;
+$dark: #222222;
+
+$blue: #006EAF;
+$pink: #fb2193;
+$red: #F55E5E;
+$orange: #ff9f43;
+$yellow: #ffc107;
+$green: #03d670;
+$teal: #20c997;
+$cyan: #17a2b8;
+$white: #fff;
+$gray: #A9A9A9;
+$gray-dark: #1e1e1e;
+$secondary: #777777;
+$info: #00B1FF;
+$light: #CCCCCC;
+$dark: #222222;
+
+
+
+h1{ font-size: 2.375rem;}
+h2{ font-size:1.875rem;}
+h3{ font-size: 1.5rem;}
+h4{ font-size: 1.125rem;}
+h5{ font-size:1rem;}
+h6{ font-size: 0.875rem;}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6{ color:#222222;}
+
+body{ color:$secondary;}
+label{color:$secondary;}
+
+
+.brand-logo{align-items: center;
+svg{ height: 70px; width: 70px;}
+}
+
+.main-menu .navbar-header{ height: auto; padding-bottom:10px;}
+.main-menu .navbar-header .navbar-brand .brand-logo img{ max-width:45px;}
+.nav .modern-nav-toggle{ margin-top:30px;}
+
+
+.tab-fill{
+    .tab-pane{ text-align: center; padding:15px 0;
+    h3{padding-top:10px;}
+    p{ padding-bottom:0px;}
+    }
+    .b-avatar-lg{ width:8rem; height:8rem; background: none;}
+
+    em{ display: block; padding-top:30px; font-style: normal;}
+
+}
