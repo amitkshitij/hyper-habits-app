@@ -14,6 +14,7 @@ const mix = require('laravel-mix')
 
 mix
   .js('resources/js/app.js', 'public/js')
+  .copy('resources/index.html', 'public/index.html')
   .webpackConfig({
     resolve: {
       alias: {
