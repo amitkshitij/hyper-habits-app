@@ -61,10 +61,10 @@ jobs:
           echo "=== Setting up SSH key ==="
           mkdir -p ~/.ssh
           cat > ~/.ssh/id_rsa << 'EOF'
-          ${{ secrets.SERVER_SSH_KEY }}
+          ${{ secrets.APP_SERVER_SSH_KEY }}
           EOF
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+          ssh-keyscan -H ${{ secrets.APP_SERVER_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
           echo "=== SSH key setup complete ==="
 
       - name: Deploy via SSH
@@ -72,9 +72,9 @@ jobs:
           set -euo pipefail
 
           APP_DIR="/home/kisvps/public_html/hyper-habits-app"
-          DEPLOY_USER="${{ secrets.SERVER_USER }}"
-          DEPLOY_HOST="${{ secrets.SERVER_HOST }}"
-          DEPLOY_PORT="${{ secrets.SERVER_PORT }}"
+          DEPLOY_USER="${{ secrets.APP_SERVER_USER }}"
+          DEPLOY_HOST="${{ secrets.APP_SERVER_HOST }}"
+          DEPLOY_PORT="${{ secrets.APP_SERVER_PORT }}"
 
           echo "=== Starting deployment to $DEPLOY_HOST ==="
 
@@ -121,9 +121,9 @@ jobs:
       - name: Verify deployment
         run: |
           echo "=== Verifying deployment ==="
-          DEPLOY_USER="${{ secrets.SERVER_USER }}"
-          DEPLOY_HOST="${{ secrets.SERVER_HOST }}"
-          DEPLOY_PORT="${{ secrets.SERVER_PORT }}"
+          DEPLOY_USER="${{ secrets.APP_SERVER_USER }}"
+          DEPLOY_HOST="${{ secrets.APP_SERVER_HOST }}"
+          DEPLOY_PORT="${{ secrets.APP_SERVER_PORT }}"
 
           ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" '
             APP_DIR="/home/kisvps/public_html/hyper-habits-app"
