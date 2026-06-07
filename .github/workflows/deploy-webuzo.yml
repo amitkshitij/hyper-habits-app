@@ -1,0 +1,148 @@
+name: Deploy to Webuzo (hyper-habits-app)
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: webuzo-hyper-habits-app-deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    name: Deploy main to production
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Verify runtime
+        run: |
+          echo "=== Verifying runtime ==="
+          node --version
+          npm --version
+          git --version
+
+      - name: Build application (Node.js/Webpack)
+        run: |
+          echo "=== Installing Node dependencies ==="
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
+
+          echo "=== Building Vue assets with Laravel Mix ==="
+          npm run production
+
+      - name: Verify artifacts
+        run: |
+          echo "=== Verifying build artifacts ==="
+          ls -la public/
+          echo "=== Built JS/CSS files ==="
+          find public -type f \( -name "*.js" -o -name "*.css" \) | head -10
+
+      - name: Setup SSH
+        run: |
+          echo "=== Setting up SSH key ==="
+          mkdir -p ~/.ssh
+          cat > ~/.ssh/id_rsa << 'EOF'
+          ${{ secrets.SERVER_SSH_KEY }}
+          EOF
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.SERVER_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
+          echo "=== SSH key setup complete ==="
+
+      - name: Deploy via SSH
+        run: |
+          set -euo pipefail
+
+          APP_DIR="/home/kisvps/public_html/hyper-habits-app"
+          DEPLOY_USER="${{ secrets.SERVER_USER }}"
+          DEPLOY_HOST="${{ secrets.SERVER_HOST }}"
+          DEPLOY_PORT="${{ secrets.SERVER_PORT }}"
+
+          echo "=== Starting deployment to $DEPLOY_HOST ==="
+
+          # Step 1: Copy built files to server
+          echo "=== Copying application files ==="
+          ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p $APP_DIR"
+
+          rsync -avz --delete \
+            --exclude='.env' \
+            --exclude='node_modules' \
+            --exclude='.git' \
+            --exclude='error_log' \
+            -e "ssh -p $DEPLOY_PORT" \
+            ./ "$DEPLOY_USER@$DEPLOY_HOST:$APP_DIR/"
+
+          # Step 2: Run post-deployment on server
+          echo "=== Running post-deployment tasks ==="
+          DEPLOY_SCRIPT='
+          set -euo pipefail
+
+          APP_DIR="'"${APP_DIR}"'"
+          cd "$APP_DIR"
+
+          echo "=== Installing Node dependencies ==="
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund
+          fi
+
+          echo "=== Building Vue assets ==="
+          npm run production
+
+          echo "=== Setting permissions ==="
+          chmod -R 755 public
+          chown -R kisvps:kisvps public
+
+          echo "=== Deployment completed successfully ==="
+          '
+
+          # Execute post-deployment on server
+          ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$DEPLOY_SCRIPT"
+
+      - name: Verify deployment
+        run: |
+          echo "=== Verifying deployment ==="
+          DEPLOY_USER="${{ secrets.SERVER_USER }}"
+          DEPLOY_HOST="${{ secrets.SERVER_HOST }}"
+          DEPLOY_PORT="${{ secrets.SERVER_PORT }}"
+
+          ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" '
+            APP_DIR="/home/kisvps/public_html/hyper-habits-app"
+
+            echo "=== Deployment verification ==="
+            echo "Directory: $APP_DIR"
+            [ -d "$APP_DIR" ] && echo "✓ Directory exists"
+            [ -d "$APP_DIR/.git" ] && echo "✓ Git repository exists"
+            [ -d "$APP_DIR/node_modules" ] && echo "✓ Node dependencies installed"
+            [ -d "$APP_DIR/public" ] && echo "✓ Public directory exists"
+            [ -f "$APP_DIR/public/js/app.js" ] && echo "✓ Built assets exist"
+
+            echo ""
+            echo "=== Latest Git commits ==="
+            cd "$APP_DIR"
+            git log --oneline -5
+          '
+
+      - name: Slack notification (optional)
+        if: failure()
+        run: |
+          echo "Deployment failed. Check logs above for details."
