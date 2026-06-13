@@ -21,7 +21,7 @@ import '@/libs/vue-select'
 import '@/libs/tour'
 
 // Axios Mock Adapter
-import '@/@fake-db/db'
+// import '@/@fake-db/db' // Disabled - using real Laravel backend API
 
 // BSV Plugin Registration
 Vue.use(ToastPlugin)

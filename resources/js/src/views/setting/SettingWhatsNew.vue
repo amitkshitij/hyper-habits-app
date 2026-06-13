@@ -57,7 +57,7 @@
         Bug Fixes
         </h3>
           <b-badge variant="blue">
-       We polished a few things, fixed bugs & made performance improvements to make Challenger experience bettter
+       We polished a few things, fixed bugs & made performance improvements to make Hyper Habits experience bettter
       </b-badge>        
       </b-media>
     <b-button

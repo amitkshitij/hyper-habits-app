@@ -10,7 +10,7 @@
       >21 By 90 Technologies Pvt Ltd</b-link>      
     </span>
 
-    <span class="float-md-right d-none d-md-block">Challenger App Admin Panel 
+    <span class="float-md-right d-none d-md-block">Hyper Habits Admin Panel 
       <feather-icon
         icon="HeartIcon"
         size="21"

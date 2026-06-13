@@ -12,7 +12,7 @@
           /> 
           
 <h3 class="large mt-2">Be the Change<span>.</span></h3>    
-<p>We at Challenger App helps you to improve your lifestyle by fixing your habits, scientifically.</p>
+<p>We at Hyper Habits helps you to improve your lifestyle by fixing your habits, scientifically.</p>
 
     </b-card>
 </b-col>  

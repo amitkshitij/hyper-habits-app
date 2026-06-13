@@ -65,9 +65,9 @@ const data = {
     
     qandA: [
       {
-        question: 'What is Challenger App?',
+        question: 'What is Hyper Habits?',
         ans:
-          'Challeger App is a science based, action oriented, data-driven, powerful yet simple to use lifestyle app which helps you build great habits and quit the ones which are stopping you to be the best version of you.          We encourage you to take a challenge, be the change and see the change. Currently the app is available for iPhone only. Click here to Download Challenger App.',
+          'Challeger App is a science based, action oriented, data-driven, powerful yet simple to use lifestyle app which helps you build great habits and quit the ones which are stopping you to be the best version of you.          We encourage you to take a challenge, be the change and see the change. Currently the app is available for iPhone only. Click here to Download Hyper Habits.',
       },
       {
         question: 'Do you’ve any free plan?',
@@ -100,9 +100,9 @@ const data = {
           'No. The app is 100% focused on today’s activities. In any condition you won’t be able to edit the status of old days/records.',
       },
       {
-        question: 'How to register with Challenger App?',
+        question: 'How to register with Hyper Habits?',
         ans:
-          'Challenger is an iOS app currently available for iPhone only. To start using it you first have to install the app and complete basic onboarding process, take the following steps: Install the app, fill out the full name, mobiile, age and other fields in the registration form, tick to agree to Challenger App Terms of Service and Privacy Policy, and click Get started now.',
+          'Challenger is an iOS app currently available for iPhone only. To start using it you first have to install the app and complete basic onboarding process, take the following steps: Install the app, fill out the full name, mobiile, age and other fields in the registration form, tick to agree to Hyper Habits Terms of Service and Privacy Policy, and click Get started now.',
       },
       {
         question: 'What’s included in my trial period?',
@@ -130,14 +130,14 @@ const data = {
           'Yes, if somehow you logged out, deleted and then reinstalled the app again while your subscription is still active then can restore the old data by restoring purchase.',
       },
       {
-        question: 'What is the purpose of Challenger App?',
+        question: 'What is the purpose of Hyper Habits?',
         ans:
-         'The purpose of Challenger App is to transforming the life of people around the world by: <br /> Building good habits: Keep you motivated throughout your habit-building journey. <br /> Quitting bad habits: Focusing on what matters like Family, Career, Relationship etc. <br /> Lifestyle & personality development: Tracking daily habits and converting them to into a powerful lifestyle & personality development actions. Take control over your habits and see the new you.',
+         'The purpose of Hyper Habits is to transforming the life of people around the world by: <br /> Building good habits: Keep you motivated throughout your habit-building journey. <br /> Quitting bad habits: Focusing on what matters like Family, Career, Relationship etc. <br /> Lifestyle & personality development: Tracking daily habits and converting them to into a powerful lifestyle & personality development actions. Take control over your habits and see the new you.',
       },
       {
-        question: 'Who is Challenger App for?',
+        question: 'Who is Hyper Habits for?',
         ans:
-          'Challenger App is generally for everyone, yeah even including kids. Technically everyone from above 7 year and its better suitable working professionals, students, housewives, learners, athletes, senior citizens, people suffering from lifestyle diseases like obesity, anxitey, stress, lazyness may also use in order to take control of their life. Never forget knowing what do you and working towards that is the only solution. Challeger app an action focused & result oriented app.',
+          'Hyper Habits is generally for everyone, yeah even including kids. Technically everyone from above 7 year and its better suitable working professionals, students, housewives, learners, athletes, senior citizens, people suffering from lifestyle diseases like obesity, anxitey, stress, lazyness may also use in order to take control of their life. Never forget knowing what do you and working towards that is the only solution. Challeger app an action focused & result oriented app.',
       },
       {
         question: 'Can I extend my trial?',

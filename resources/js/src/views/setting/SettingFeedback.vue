@@ -2,7 +2,7 @@
 <b-form @submit.prevent>
 
     <h2> How are we doing?</h2>
-    <p>Report a bug or suggest ways to make Challenger App better</p>   
+    <p>Report a bug or suggest ways to make Hyper Habits better</p>   
           <b-row>
     <b-col cols="8">
   <b-row>

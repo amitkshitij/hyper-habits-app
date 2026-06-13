@@ -4,7 +4,7 @@
     id="pricing-plan"
   >
 <h2>Hi Pramila</h2>
-    <p>Challenger is simple to use lifestyle app which helps you build great habits & breaking bad ones</p>   
+    <p>Hyper Habits is a simple to use lifestyle app which helps you build great habits & breaking bad ones</p>   
       <b-img   class="mt-1"     
         :src="require('@/assets/images/settingicon/user-chat.png')"
       

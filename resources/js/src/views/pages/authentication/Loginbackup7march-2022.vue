@@ -3,7 +3,7 @@
     <b-row class="auth-inner m-0">
 
       <!-- Brand logo-->
-      <b-link class="brand-logo"  title=" Challenger App">
+      <b-link class="brand-logo"  title=" Hyper Habits">
         <vuexy-logo />
         <h2 class="brand-text text-primary ml-1">
         Challenger
@@ -162,7 +162,7 @@
           </validation-observer>
 
           <b-card-text class="text-center mt-2">
-            <span>New to Challenger App? </span>
+            <span>New to Hyper Habits? </span>
             <b-link :to="{name:'auth-register'}">
               <span>&nbsp;Create an account</span>
             </b-link>

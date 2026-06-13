@@ -193,8 +193,8 @@ Contact support team
           <b-col lg="12">
  <b-form-input
             id="h-number"
-              type="Challenger "
-            placeholder="Challenger "
+              type="Hyper Habits "
+            placeholder="Hyper Habits "
             size="lg"
           />
           </b-col>
@@ -234,7 +234,7 @@ Contact support team
         :src="require('@/assets/images/settingicon/goodbye.png')"
       
       /> 
-         <h3 class="mt-1">We’re really sorry to see you go,  thanks for giving Challenger a try!</h3>
+         <h3 class="mt-1">We’re really sorry to see you go,  thanks for giving Hyper Habits a try!</h3>
          <h3 style="color:#FF7070;" class="mt-3">We wish you a healthy, wealthy and happy life.</h3>
          <div class="dismiss mt-3"><p> <b-img class="mr-1"
             :src="require('@/assets/images/settingicon/check.svg')"                        

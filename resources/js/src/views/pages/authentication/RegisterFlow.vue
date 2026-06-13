@@ -27,7 +27,7 @@
         <!-- social buttons -->
          <b-card-text>
             <h3>Take a Challenge. <br> Be the Change.</h3>
-            <p>Challenger App is based on science, action oriented and easy yet powerful lifestyle app which helps you build great habits and quit the ones which are stopping you to be the best version of you.</p>
+            <p>Hyper Habits is based on science, action oriented and easy yet powerful lifestyle app which helps you build great habits and quit the ones which are stopping you to be the best version of you.</p>
         </b-card-text>
           <b-button class="mt-1"
               variant="success"
