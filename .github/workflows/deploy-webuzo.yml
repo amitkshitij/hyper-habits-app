@@ -85,8 +85,10 @@ jobs:
           rsync -avz --delete \
             --exclude='.env' \
             --exclude='node_modules' \
+            --exclude='vendor' \
             --exclude='.git' \
             --exclude='error_log' \
+            --exclude='storage/logs/*.log' \
             -e "ssh -p $DEPLOY_PORT" \
             ./ "$DEPLOY_USER@$DEPLOY_HOST:$APP_DIR/"
 
@@ -97,6 +99,17 @@ jobs:
 
           APP_DIR="'"${APP_DIR}"'"
           cd "$APP_DIR"
+
+          echo "=== Installing PHP dependencies ==="
+          composer install --no-dev --optimize-autoloader
+
+          echo "=== Running Migrations ==="
+          php artisan migrate --force
+
+          echo "=== Clearing Caches ==="
+          php artisan config:clear
+          php artisan cache:clear
+          php artisan route:clear
 
           echo "=== Installing Node dependencies ==="
           if [ -f package-lock.json ]; then
