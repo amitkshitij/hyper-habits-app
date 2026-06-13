@@ -11,7 +11,7 @@ const data = {
       // eslint-disable-next-line global-require
       avatar: require('@/assets/images/avatars/13-small.png'),
       email: 'admin@demo.com',
-      role: 'Delhi, Seeker',
+      role: 'admin',
       ability: [
         {
           action: 'manage',
@@ -33,12 +33,8 @@ const data = {
       role: 'client',
       ability: [
         {
-          action: 'read',
-          subject: 'ACL',
-        },
-        {
-          action: 'read',
-          subject: 'Auth',
+          action: 'manage',
+          subject: 'all',
         },
       ],
       extras: {
