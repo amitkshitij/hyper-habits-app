@@ -71,7 +71,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          APP_DIR="/home/kisvps/public_html/hyper-habits-app"
+          APP_DIR="/home/kisvps/public_html/app.hyper-habits.com"
           DEPLOY_USER="${{ secrets.APP_SERVER_USER }}"
           DEPLOY_HOST="${{ secrets.APP_SERVER_HOST }}"
           DEPLOY_PORT="${{ secrets.APP_SERVER_PORT }}"
@@ -126,7 +126,7 @@ jobs:
           DEPLOY_PORT="${{ secrets.APP_SERVER_PORT }}"
 
           ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" '
-            APP_DIR="/home/kisvps/public_html/hyper-habits-app"
+            APP_DIR="/home/kisvps/public_html/app.hyper-habits.com"
 
             echo "=== Deployment verification ==="
             echo "Directory: $APP_DIR"
