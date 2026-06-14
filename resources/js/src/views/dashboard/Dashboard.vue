@@ -266,14 +266,19 @@ export default {
     BButton,
   },
   data() {
+    const userData = JSON.parse(localStorage.getItem('userData') || '{}')
     return {
-      data: {},
+      data: {
+        congratulations: {
+          name: userData.fullName || userData.username || 'User',
+          saleToday: '0',
+        },
+      },
     }
   },
   created() {
-    // data
-    this.$http.get('/dashboard/data')
-      .then(response => { this.data = response.data })
+    // Dashboard data loaded from localStorage (logged-in user)
+    // Real API data will be added when backend endpoints are ready
   },
   methods: {
     kFormatter,
