@@ -15,147 +15,168 @@ concurrency:
 
 jobs:
   deploy:
-    name: Deploy main to production
+    name: Build & Deploy to Production
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    timeout-minutes: 25
 
     steps:
+      # ─────────────────────────────────────────────────────────────
+      # 1. Checkout
+      # ─────────────────────────────────────────────────────────────
       - name: Checkout code
         uses: actions/checkout@v4
         with:
           fetch-depth: 1
 
+      # ─────────────────────────────────────────────────────────────
+      # 2. Node.js setup with cache
+      # ─────────────────────────────────────────────────────────────
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '18'
+          cache: 'npm'
 
-      - name: Verify runtime
+      # ─────────────────────────────────────────────────────────────
+      # 3. Install JS dependencies
+      # ─────────────────────────────────────────────────────────────
+      - name: Install Node dependencies
         run: |
-          echo "=== Verifying runtime ==="
-          node --version
-          npm --version
-          git --version
-
-      - name: Build application (Node.js/Webpack)
-        run: |
-          echo "=== Installing Node dependencies ==="
+          echo "Node $(node --version) | npm $(npm --version)"
           if [ -f package-lock.json ]; then
             npm ci --no-audit --no-fund
           else
             npm install --no-audit --no-fund
           fi
 
+      # ─────────────────────────────────────────────────────────────
+      # 4. Build Vue/Webpack assets (once, here in CI)
+      # ─────────────────────────────────────────────────────────────
+      - name: Build production assets
+        run: |
           echo "=== Building Vue assets with Laravel Mix ==="
-          npm run production
+          NODE_OPTIONS=--openssl-legacy-provider npm run production
+          echo "=== Build complete ==="
+          echo "Built files:"
+          find public -type f \( -name "*.js" -o -name "*.css" \) | grep -v chunks | head -10
 
-      - name: Verify artifacts
-        run: |
-          echo "=== Verifying build artifacts ==="
-          ls -la public/
-          echo "=== Built JS/CSS files ==="
-          find public -type f \( -name "*.js" -o -name "*.css" \) | head -10
-
+      # ─────────────────────────────────────────────────────────────
+      # 5. Setup SSH key (using env var — avoids heredoc formatting issues)
+      # ─────────────────────────────────────────────────────────────
       - name: Setup SSH
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.APP_SERVER_SSH_KEY }}
+          SSH_HOST: ${{ secrets.APP_SERVER_HOST }}
         run: |
-          echo "=== Setting up SSH key ==="
+          echo "=== Setting up SSH ==="
           mkdir -p ~/.ssh
-          cat > ~/.ssh/id_rsa << 'EOF'
-          ${{ secrets.APP_SERVER_SSH_KEY }}
-          EOF
+          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H ${{ secrets.APP_SERVER_HOST }} >> ~/.ssh/known_hosts 2>/dev/null || true
-          echo "=== SSH key setup complete ==="
+          ssh-keyscan -H "$SSH_HOST" >> ~/.ssh/known_hosts 2>/dev/null || true
+          echo "=== SSH ready ==="
 
-      - name: Deploy via SSH
+      # ─────────────────────────────────────────────────────────────
+      # 6. Sync files to server (excluding .env, vendor, node_modules, .git)
+      #    Built public/js and public/css ARE included (built in step 4)
+      # ─────────────────────────────────────────────────────────────
+      - name: Sync files to server
+        env:
+          DEPLOY_USER: ${{ secrets.APP_SERVER_USER }}
+          DEPLOY_HOST: ${{ secrets.APP_SERVER_HOST }}
+          DEPLOY_PORT: ${{ secrets.APP_SERVER_PORT }}
         run: |
-          set -euo pipefail
-
           APP_DIR="/home/kisvps/public_html/app.hyper-habits.com"
-          DEPLOY_USER="${{ secrets.APP_SERVER_USER }}"
-          DEPLOY_HOST="${{ secrets.APP_SERVER_HOST }}"
-          DEPLOY_PORT="${{ secrets.APP_SERVER_PORT }}"
+          echo "=== Syncing to $DEPLOY_HOST:$APP_DIR ==="
 
-          echo "=== Starting deployment to $DEPLOY_HOST ==="
+          # Ensure target dir exists
+          ssh -p "$DEPLOY_PORT" -o StrictHostKeyChecking=no \
+            "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p $APP_DIR"
 
-          # Step 1: Copy built files to server
-          echo "=== Copying application files ==="
-          ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "mkdir -p $APP_DIR"
-
-          rsync -avz --delete \
+          # Sync everything except secrets/heavy dirs
+          # NOTE: public/js and public/css are synced (built above)
+          rsync -az --delete \
             --exclude='.env' \
+            --exclude='.git' \
             --exclude='node_modules' \
             --exclude='vendor' \
-            --exclude='.git' \
-            --exclude='error_log' \
             --exclude='storage/logs/*.log' \
-            -e "ssh -p $DEPLOY_PORT" \
+            --exclude='storage/framework/cache/*' \
+            --exclude='storage/framework/sessions/*' \
+            --exclude='storage/framework/views/*' \
+            --exclude='bootstrap/cache/*.php' \
+            -e "ssh -p $DEPLOY_PORT -o StrictHostKeyChecking=no" \
             ./ "$DEPLOY_USER@$DEPLOY_HOST:$APP_DIR/"
 
-          # Step 2: Run post-deployment on server
-          echo "=== Running post-deployment tasks ==="
-          DEPLOY_SCRIPT='
-          set -euo pipefail
+          echo "=== Sync complete ==="
 
-          APP_DIR="'"${APP_DIR}"'"
+      # ─────────────────────────────────────────────────────────────
+      # 7. Run server-side post-deploy tasks (PHP only — no npm rebuild)
+      # ─────────────────────────────────────────────────────────────
+      - name: Post-deploy server tasks
+        env:
+          DEPLOY_USER: ${{ secrets.APP_SERVER_USER }}
+          DEPLOY_HOST: ${{ secrets.APP_SERVER_HOST }}
+          DEPLOY_PORT: ${{ secrets.APP_SERVER_PORT }}
+        run: |
+          APP_DIR="/home/kisvps/public_html/app.hyper-habits.com"
+
+          ssh -p "$DEPLOY_PORT" -o StrictHostKeyChecking=no \
+            "$DEPLOY_USER@$DEPLOY_HOST" bash << REMOTE
+          set -e
           cd "$APP_DIR"
+          echo "=== Working in: \$(pwd) ==="
 
-          echo "=== Installing PHP dependencies ==="
-          composer install --no-dev --optimize-autoloader
+          echo "--- Installing PHP dependencies ---"
+          composer install --no-dev --optimize-autoloader --quiet
 
-          echo "=== Running Migrations ==="
+          echo "--- Running DB migrations ---"
           php artisan migrate --force
 
-          echo "=== Clearing Caches ==="
+          echo "--- Clearing & caching config ---"
           php artisan config:clear
           php artisan cache:clear
           php artisan route:clear
+          php artisan view:clear
+          php artisan config:cache
+          php artisan route:cache
 
-          echo "=== Installing Node dependencies ==="
-          if [ -f package-lock.json ]; then
-            npm ci --no-audit --no-fund
-          else
-            npm install --no-audit --no-fund
-          fi
+          echo "--- Setting file permissions ---"
+          chmod -R 755 public/
+          chmod -R 775 storage/ bootstrap/cache/
+          chown -R kisvps:kisvps storage/ bootstrap/cache/ public/
 
-          echo "=== Building Vue assets ==="
-          npm run production
+          echo "--- Deployment finished successfully ---"
+          REMOTE
 
-          echo "=== Setting permissions ==="
-          chmod -R 755 public
-          chown -R kisvps:kisvps public
-
-          echo "=== Deployment completed successfully ==="
-          '
-
-          # Execute post-deployment on server
-          ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" "$DEPLOY_SCRIPT"
-
+      # ─────────────────────────────────────────────────────────────
+      # 8. Verify deployment
+      # ─────────────────────────────────────────────────────────────
       - name: Verify deployment
+        env:
+          DEPLOY_USER: ${{ secrets.APP_SERVER_USER }}
+          DEPLOY_HOST: ${{ secrets.APP_SERVER_HOST }}
+          DEPLOY_PORT: ${{ secrets.APP_SERVER_PORT }}
         run: |
-          echo "=== Verifying deployment ==="
-          DEPLOY_USER="${{ secrets.APP_SERVER_USER }}"
-          DEPLOY_HOST="${{ secrets.APP_SERVER_HOST }}"
-          DEPLOY_PORT="${{ secrets.APP_SERVER_PORT }}"
+          APP_DIR="/home/kisvps/public_html/app.hyper-habits.com"
 
-          ssh -p "$DEPLOY_PORT" "$DEPLOY_USER@$DEPLOY_HOST" '
-            APP_DIR="/home/kisvps/public_html/app.hyper-habits.com"
+          ssh -p "$DEPLOY_PORT" -o StrictHostKeyChecking=no \
+            "$DEPLOY_USER@$DEPLOY_HOST" bash << REMOTE
+          APP_DIR="$APP_DIR"
+          echo "=== Deployment Verification ==="
+          [ -f "\$APP_DIR/public/js/app.js" ]   && echo "✅ JS assets present"   || echo "❌ JS assets MISSING"
+          [ -f "\$APP_DIR/public/css/app.css" ]  && echo "✅ CSS assets present"  || echo "❌ CSS assets MISSING"
+          [ -f "\$APP_DIR/public/index.html" ]   && echo "✅ index.html present"  || echo "❌ index.html MISSING"
+          [ -f "\$APP_DIR/.env" ]                && echo "✅ .env preserved"      || echo "⚠️  .env not found (check manually)"
+          [ -d "\$APP_DIR/vendor" ]              && echo "✅ Vendor installed"    || echo "❌ Vendor MISSING"
+          echo ""
+          echo "🌐 Live at: https://app.hyper-habits.com"
+          REMOTE
 
-            echo "=== Deployment verification ==="
-            echo "Directory: $APP_DIR"
-            [ -d "$APP_DIR" ] && echo "✓ Directory exists"
-            [ -d "$APP_DIR/node_modules" ] && echo "✓ Node dependencies installed"
-            [ -d "$APP_DIR/public" ] && echo "✓ Public directory exists"
-            [ -f "$APP_DIR/public/js/app.js" ] && echo "✓ Built assets exist"
-            [ -f "$APP_DIR/package.json" ] && echo "✓ package.json exists"
-
-            echo ""
-            echo "=== Deployment complete ==="
-            echo "App deployed to: $APP_DIR"
-            echo "Public URL: https://app.hyper-habits.com"
-          '
-
-      - name: Slack notification (optional)
+      # ─────────────────────────────────────────────────────────────
+      # 9. Notify on failure
+      # ─────────────────────────────────────────────────────────────
+      - name: Notify on failure
         if: failure()
         run: |
-          echo "Deployment failed. Check logs above for details."
+          echo "❌ Deployment FAILED. Review the steps above for details."
+          echo "Tip: Check SSH key secret, server disk space, and composer/artisan errors."
