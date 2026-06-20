@@ -1,32 +1,12 @@
 <?php
 
-error_reporting(E_ALL);
-ini_set('error_reporting', E_ALL);
-ini_set("display_errors", 1);
-
-/* $mysqli = new mysqli("localhost", "kisvps_wby90user", "Q!W@E#r4t5", "kisvps_21by90com");
-
-
-if ($mysqli->connect_errno) {
-    printf("Connect failed: %s\n", $mysqli->connect_error);
-    exit();
-}
-
-if ($mysqli->ping()) {
-    printf ("Our connection is ok!\n");
-} else {
-    printf ("Error: %s\n", $mysqli->error);
-}
-
-
-$mysqli->close();
-exit; */
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
+
 $uri = urldecode(
     parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)
 );
-//echo "hello"; die;
+
 // This file allows us to emulate Apache's "mod_rewrite" functionality from the
 // built-in PHP web server. This provides a convenient way to test a Laravel
 // application without having installed a "real" web server software here.
