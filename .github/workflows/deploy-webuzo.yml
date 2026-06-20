@@ -110,7 +110,74 @@ jobs:
           echo "=== Sync complete ==="
 
       # ─────────────────────────────────────────────────────────────
-      # 7. Run server-side post-deploy tasks (PHP only — no npm rebuild)
+      # 7. Sync DB env values into the server .env
+      #    Only the database credentials are updated; other production
+      #    settings on the server remain untouched.
+      # ─────────────────────────────────────────────────────────────
+      - name: Update server DB env
+        env:
+          DEPLOY_USER: ${{ secrets.APP_SERVER_USER }}
+          DEPLOY_HOST: ${{ secrets.APP_SERVER_HOST }}
+          DEPLOY_PORT: ${{ secrets.APP_SERVER_PORT }}
+        run: |
+          set -a
+          . ./.env
+          set +a
+
+          DB_CONNECTION_ESCAPED=$(printf '%q' "$DB_CONNECTION")
+          DB_HOST_ESCAPED=$(printf '%q' "$DB_HOST")
+          DB_PORT_ESCAPED=$(printf '%q' "$DB_PORT")
+          DB_DATABASE_ESCAPED=$(printf '%q' "$DB_DATABASE")
+          DB_USERNAME_ESCAPED=$(printf '%q' "$DB_USERNAME")
+          DB_PASSWORD_ESCAPED=$(printf '%q' "$DB_PASSWORD")
+
+          APP_DIR="/home/kisvps/public_html/app.hyper-habits.com"
+
+          ssh -p "$DEPLOY_PORT" -o StrictHostKeyChecking=no \
+            "$DEPLOY_USER@$DEPLOY_HOST" \
+            "DB_CONNECTION=$DB_CONNECTION_ESCAPED DB_HOST=$DB_HOST_ESCAPED DB_PORT=$DB_PORT_ESCAPED DB_DATABASE=$DB_DATABASE_ESCAPED DB_USERNAME=$DB_USERNAME_ESCAPED DB_PASSWORD=$DB_PASSWORD_ESCAPED APP_DIR=$APP_DIR bash -s" <<'REMOTE'
+          set -e
+          cd "$APP_DIR"
+
+          php -r '
+          $path = ".env";
+          $values = [
+              "DB_CONNECTION" => getenv("DB_CONNECTION"),
+              "DB_HOST" => getenv("DB_HOST"),
+              "DB_PORT" => getenv("DB_PORT"),
+              "DB_DATABASE" => getenv("DB_DATABASE"),
+              "DB_USERNAME" => getenv("DB_USERNAME"),
+              "DB_PASSWORD" => getenv("DB_PASSWORD"),
+          ];
+
+          $lines = file_exists($path)
+              ? file($path, FILE_IGNORE_NEW_LINES)
+              : [];
+
+          $updated = [];
+          foreach ($lines as &$line) {
+              foreach ($values as $key => $value) {
+                  if (strpos($line, $key . "=") === 0) {
+                      $line = $key . '="' . addcslashes($value, "\\\"") . '"';
+                      $updated[$key] = true;
+                      break;
+                  }
+              }
+          }
+          unset($line);
+
+          foreach ($values as $key => $value) {
+              if (!isset($updated[$key])) {
+                  $lines[] = $key . '="' . addcslashes($value, "\\\"") . '"';
+              }
+          }
+
+          file_put_contents($path, implode(PHP_EOL, $lines) . PHP_EOL);
+          '
+          REMOTE
+
+      # ─────────────────────────────────────────────────────────────
+      # 8. Run server-side post-deploy tasks (PHP only — no npm rebuild)
       # ─────────────────────────────────────────────────────────────
       - name: Post-deploy server tasks
         env:
@@ -152,7 +219,7 @@ jobs:
           REMOTE
 
       # ─────────────────────────────────────────────────────────────
-      # 8. Verify deployment
+      # 9. Verify deployment
       # ─────────────────────────────────────────────────────────────
       - name: Verify deployment
         env:
@@ -176,7 +243,7 @@ jobs:
           REMOTE
 
       # ─────────────────────────────────────────────────────────────
-      # 9. Notify on failure
+      # 10. Notify on failure
       # ─────────────────────────────────────────────────────────────
       - name: Notify on failure
         if: failure()
