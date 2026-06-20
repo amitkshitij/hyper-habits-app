@@ -126,6 +126,9 @@ jobs:
           cd "$APP_DIR"
           echo "=== Working in: \$(pwd) ==="
 
+          echo "--- Clearing stale Laravel caches before install/migrate ---"
+          php artisan optimize:clear
+
           echo "--- Installing PHP dependencies ---"
           composer install --no-dev --optimize-autoloader --quiet
 

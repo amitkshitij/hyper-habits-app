@@ -26,6 +26,9 @@ echo "=== ⚡ Running post-deployment tasks on server ==="
 ssh -i "$SSH_KEY" -p "$DEPLOY_PORT" -o StrictHostKeyChecking=no "$DEPLOY_USER@$DEPLOY_HOST" "
   set -e
   cd $APP_DIR
+
+  echo '=== Clearing stale Laravel caches before install/migrate ==='
+  php artisan optimize:clear
   
   echo '=== Installing PHP dependencies ==='
   composer install --no-dev --optimize-autoloader
